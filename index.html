@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You zi 💗🎀</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#fff1f5,#fffaf0);
+  overflow:hidden;
+}
+
+.phone{
+  width:min(420px,100%);
+  aspect-ratio:9/16;
+  border-radius:40px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 50px 120px rgba(0,0,0,.25);
+  background:linear-gradient(135deg,#fffdfb,#fff1f5);
+}
+
+.section{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  text-align:center;
+}
+
+.section.active{
+  display:flex;
+  animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.card{
+  width:100%;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px);
+  border-radius:30px;
+  padding:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:15px;
+  color:#7a4b5e;
+}
+
+p{
+  color:#555;
+  line-height:1.7;
+  font-size:15px;
+}
+
+.btn{
+  margin-top:20px;
+  padding:12px 35px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  cursor:pointer;
+  font-weight:500;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  transition:.3s;
+}
+.btn:hover{transform:scale(1.05)}
+
+.music-main{
+  font-size:18px;
+  padding:16px 45px;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  box-shadow:0 0 25px rgba(255,120,150,0.6);
+  animation:softGlow 2s infinite alternate;
+}
+
+@keyframes softGlow{
+  from{box-shadow:0 0 15px rgba(255,120,150,0.4);}
+  to{box-shadow:0 0 35px rgba(255,120,150,0.8);}
+}
+
+.small-btn{
+  font-size:13px;
+  padding:8px 20px;
+  margin-top:12px;
+  opacity:0.8;
+}
+
+.img-single{
+  width:100%;
+  border-radius:20px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.img-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.img-row img{
+  width:50%;
+  border-radius:20px;
+  object-fit:cover;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* WHEEL */
+.wheel-container{
+  position:relative;
+  width:270px;
+  height:270px;
+  margin:20px auto;
+}
+
+#wheel{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:8px solid white;
+  transition:transform 6s cubic-bezier(.2,0,.1,1);
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+
+.arrow{
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:26px;height:26px;
+  background:#7a4b5e;
+  clip-path:polygon(50% 100%,0 0,100% 0);
+}
+
+#popup{
+  position:absolute;
+  bottom:-100%;
+  width:100%;
+  background:white;
+  padding:22px;
+  border-radius:20px 20px 0 0;
+  transition:1s;
+}
+#popup.show{bottom:0}
+</style>
+</head>
+
+<body>
+<div class="phone">
+
+<audio id="bgMusic" loop>
+  <source src="honey.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INTRO -->
+<div class="section active" id="page0">
+  <div class="card">
+    <h1>Hello💗 񓐼/h1></h1>
+    <p>Bas aapke liye 💗 So rule to pta hoga sabse pehle smile karna hota hai 💗 karo phir 🤝.</p>
+    <button class="btn" onclick="nextPage(1)">Open</button>
+  </div>
+</div>
+
+<!-- MUSIC PAGE -->
+<div class="section" id="page1">
+  <div class="card">
+    <h2>How should we go through this? 🎧</h2>
+    <p>Would you like soft background music?</p>
+    <button class="btn music-main" onclick="startWithMusic()">✨ With Music 🤍</button>
+    <button class="btn small-btn" onclick="startWithoutMusic()">Continue Without Music</button>
+  </div>
+</div>
+
+<!-- WELCOME -->
+<div class="section" id="page2">
+  <div class="card">
+    <img src="IMG_20260219_161948_163.jpg" class="img-single">
+    <h2>Heyyyyyyy 🤝</h2>
+    <p>
+      I just wanted to make your day a little softer.  
+      Thoda sa mood off ho gaya tha na…  
+      socha thoda sa theek kar dete hain 💗  
+      Even if it’s just for a few minutes.
+    </p>
+    <button class="btn" onclick="nextPage(3)">Continue</button>
+  </div>
+</div>
+
+<!-- SORRY -->
+<div class="section" id="page3">
+  <div class="card">
+    <img src="IMG_20260219_161947_732.jpg" class="img-single">
+    <h2>I’m Sorry</h2>
+    <p>
+      If I made your heavy days heavier,  
+      if I reacted wrong or said something carelessly,  
+      I genuinely regret it. Madam zi bacha samjh ke maaf kar dena 🙏💗  
+      Intent kabhi hurt karne ka nahi tha.
+    </p>
+    <button class="btn" onclick="nextPage(4)">Next</button>
+  </div>
+</div>
+
+<!-- STILL US -->
+<div class="section" id="page4">
+  <div class="card">
+    <div class="img-row">
+      <img src="IMG_20260219_161947_634.jpg">
+      <img src="IMG_20260219_161947_895.jpg">
+    </div>
+    <h2>Still Us 🤍</h2>
+    <p>
+      No matter small arguments, mood swings,  
+      or random misunderstandings…  
+      what matters to me is this connection.  
+      I don’t want ego💗. I want us zi and better to clear the misunderstanding always rather than ghosting each other 😶‍🌫️  
+      Agar kabhi kuch off lage to bas baat kar lena.  
+      I promise main kabhi disappear nahi hunga 💗  
+      Communication ka tarika band nahi karte — that’s my side.
+    </p>
+    <button class="btn" onclick="nextPage(5); drawWheel()">Spin Something Cute</button>
+  </div>
+</div>
+
+<!-- WHEEL -->
+<div class="section" id="page5">
+  <div class="card">
+    <h2>Spin for Surprise 🤍</h2>
+    <div class="wheel-container">
+      <div class="arrow"></div>
+      <canvas id="wheel"></canvas>
+    </div>
+    <button class="btn" onclick="spin()">Spin</button>
+  </div>
+
+  <div id="popup">
+    <h3 id="resultTitle"></h3>
+    <p id="resultText"></p>
+    <button class="btn" onclick="closePopup()">Continue</button>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div class="section" id="page6">
+  <div class="card">
+    <div class="img-row">
+      <img src="IMG_20260219_161947_634.jpg">
+      <img src="IMG_20260219_161947_895.jpg">
+    </div>
+    <h2>One More Thing 🤍</h2>
+    <p>
+      Madam zi, no matter the mood or the day,  
+      I’m here and khafa na hoya karo .  
+      And yes… maybe with a little surprise too 😉  
+      But more than that, kuch nhi smile kar do wo hi kafi hai mere liye 💗  
+      Ab surprise to surprise howe hai ruk jao kuch pal 😉.
+    </p>
+    <button class="btn">Stay With Me 🤍</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function nextPage(num){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('page'+num).classList.add('active');
+}
+
+function startWithMusic(){
+  const music=document.getElementById("bgMusic");
+  music.volume=0.5;
+  music.play().catch(()=>{});
+  nextPage(2);
+}
+
+function startWithoutMusic(){
+  nextPage(2);
+}
+
+/* WHEEL */
+const items=[
+"Chocolate + Surprise 🍫",
+"Hug + Surprise 🤍",
+"Rest + Surprise 💤",
+"Care + Surprise 😉",
+"Sleep + Surprise 🌙",
+"Ice Cream + Surprise 🍨"
+];
+
+const canvas=document.getElementById('wheel');
+const ctx=canvas.getContext('2d');
+
+function drawWheel(){
+canvas.width=600;
+canvas.height=600;
+let arc=(Math.PI*2)/items.length;
+
+items.forEach((item,i)=>{
+ctx.beginPath();
+ctx.fillStyle=i%2?"#ffe0e9":"#fff7e6";
+ctx.moveTo(300,300);
+ctx.arc(300,300,300,i*arc,(i+1)*arc);
+ctx.fill();
+
+ctx.save();
+ctx.translate(300,300);
+ctx.rotate(i*arc+arc/2);
+ctx.textAlign="center";
+ctx.fillStyle="#7a4b5e";
+ctx.font="bold 26px Poppins";
+ctx.shadowColor="rgba(0,0,0,0.2)";
+ctx.shadowBlur=4;
+ctx.fillText(item,200,8);
+ctx.restore();
+});
+}
+
+function spin(){
+let index=Math.floor(Math.random()*items.length);
+let deg=360/items.length;
+let rotation=(360*8)+(360-(index*deg))-deg/2-90;
+canvas.style.transform=`rotate(${rotation}deg)`;
+
+setTimeout(()=>{
+resultTitle.innerText=items[index];
+resultText.innerText="Looks like this one comes with something extra 😉";
+popup.classList.add('show');
+},6000);
+}
+
+function closePopup(){
+popup.classList.remove('show');
+nextPage(6);
+}
+</script>
+
+</body>
+</html>
